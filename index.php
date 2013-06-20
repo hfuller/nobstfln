@@ -3,6 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<title>No-Bullshit TFLN Mobile Scraper</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width" /> 
 	</head>
 	<style type="text/css">
 		/* http://puu.sh/30ge8.png */
@@ -50,6 +52,11 @@
 		.actions {
 			text-align:center;
 		}
+		@media (max-width: 600px) {
+			.night {
+				display: none;
+			}
+		}
 	</style>
 	<body>
 		<div id="thegoddamnpage">
@@ -86,6 +93,7 @@ for ( $j = 1; $j < count($page); $j++ ) {
 	$vote = str_replace('href="','href="http://textsfromlastnight.com',$vote[0]);
 	$vote = str_replace('class="good-night" ','class="good-night" onclick="return count(this);" ',$vote);
 	$vote = str_replace('class="bad-night" ','class="bad-night" onclick="return count(this);" ',$vote);
+	$vote = str_replace(' night','<span class="night"> night</span>',$vote); //change "Good night" to "Good" and "Bad night" to "Bad" on phones
 	$vote = explode('<a class="tshirt"',$vote);
 	echo('<div class="actions">' . $vote[0] . '</div>');
 	
@@ -147,9 +155,7 @@ echo('</div>');
 				theobject.innerHTML = "Hold on...";
 				
 				theobject.style.color = "#777777";
-				//theobject.style = "text-decoration:none;"
 							
-				//alert("whatever");
 				return false;
 			 
 			}
