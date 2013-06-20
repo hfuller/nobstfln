@@ -5,17 +5,50 @@
 		<title>No-Bullshit TFLN Mobile Scraper</title>
 	</head>
 	<style type="text/css">
+		/* http://puu.sh/30ge8.png */
 		body {
 			text-align:center;
 			font-family:sans-serif;
+			background-color:#1D2126;
 		}
 		#thegoddamnpage {
 			max-width:35em;
 			margin:0px auto;
 			text-align:left;
+			background-color:#8C232C;
+			color:#F2F2F2;
+			padding-left:16px;
+			padding-right:16px;
+			
+			padding-top:5px;
+			padding-bottom:5px;
+			
+			-webkit-border-radius: 45px;
+			-moz-border-radius: 45px;
+			border-radius: 45px;
 		}
 		.item {
-			background-color:#F5E4E4;
+			background-color:#F2F2F2;
+			color:#1D2126;
+			
+			border-style:solid;
+			-webkit-border-radius: 15px;
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			
+			padding-left:10px;
+			padding-right:10px;
+			
+			border-color:#732735;
+			
+			padding-top:5px;
+			padding-bottom:5px;
+			
+			margin-top:12px;
+			margin-bottom:12px;
+		}
+		.actions {
+			text-align:center;
 		}
 	</style>
 	<body>
@@ -27,8 +60,9 @@ if ( $_REQUEST['page'] < 1 ) {
 }
 
 //to make Seth happy
+echo('<div class="actions pager">');
 include("_pager.php");
-echo('<br /><hr />');
+echo('</div><hr />');
 
 $page = file_get_contents("http://www.textsfromlastnight.com/texts/page:" . addslashes($_REQUEST['page']));
 
@@ -53,12 +87,14 @@ for ( $j = 1; $j < count($page); $j++ ) {
 	$vote = str_replace('class="good-night" ','class="good-night" onclick="return count(this);" ',$vote);
 	$vote = str_replace('class="bad-night" ','class="bad-night" onclick="return count(this);" ',$vote);
 	$vote = explode('<a class="tshirt"',$vote);
-	echo($vote[0]);
+	echo('<div class="actions">' . $vote[0] . '</div>');
 	
-	echo("</div><hr />\n\n");
+	echo("</div>\n\n");
 }
 
+echo('<hr/><div class="actions pager">');
 include("_pager.php");
+echo('</div>');
 
 ?>
 		</div>
