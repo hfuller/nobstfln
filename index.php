@@ -111,10 +111,6 @@ echo('</div>');
 
 			function count(theobject)
 			{
-				//alert(thelink);
-				//alert("test");
-				//alert(this.href);
-			 
 				var xmlhttp=false;
 				try {
 					xmlhttp=new XMLHttpRequest();
@@ -130,17 +126,8 @@ echo('</div>');
 				xmlhttp.onreadystatechange = gotresponse;
 				function gotresponse() {
 					if ( xmlhttp.readyState == 4 ) {
-						//alert(xmlhttp.responseText);
-						//json = eval('(' + xmlhttp.responseText + ')');
-						//alert(json['message']);
-						//var value = eval(xmlhttp.responseText);
 						var myObject = eval('(' + xmlhttp.responseText + ')');
-						//alert(value[0]);
-						//theobject.style.display = "none";
-						//alert(myObject.message);
 						theobject.innerHTML = myObject.message;
-						
-						
 					}
 				}
 				
@@ -159,30 +146,6 @@ echo('</div>');
 				return false;
 			 
 			}
-
-			/*
-			
-			function addEvent(a,e,o)
-			{
-			 if(document.addEventListener)
-			 {
-			  a.removeEventListener(e,o,false);
-			  a.addEventListener(e,o,false);
-			 }
-			 else
-			 {
-			  a.detachEvent('on'+e,o);
-			  a.attachEvent('on'+e,o);
-			 }
-			}
-
-			a=document.getElementsByTagName('A');
-			for(i=0;i<a.length;i++)
-			{
-			 addEvent(a[i],'click',count);
-			}
-			
-			*/
 
 		</script>
 
