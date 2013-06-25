@@ -5,7 +5,10 @@
 		<title>No-Bullshit TFLN Mobile Scraper</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="viewport" content="width=device-width" /> 
+		<script type="text/javascript" src="jquery.min.js"></script>
 	</head>
+	<!-- oh by the way I'm really sorry. I wrote this code a long time ago and it still works. 
+			I am gradually updating it, I promise -->
 	<style type="text/css">
 		/* http://puu.sh/30ge8.png */
 		body {
@@ -111,27 +114,18 @@ echo('</div>');
 
 			function count(theobject)
 			{
-				var xmlhttp=false;
-				try {
-					xmlhttp=new XMLHttpRequest();
-				} catch (e) {
-					try {
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					} catch (E) {
-						xmlhttp = false;
-					}
-				}
 				
-				xmlhttp.open("GET","_proxy.php?uri=" + theobject.href);
-				xmlhttp.onreadystatechange = gotresponse;
-				function gotresponse() {
-					if ( xmlhttp.readyState == 4 ) {
-						var myObject = eval('(' + xmlhttp.responseText + ')');
-						theobject.innerHTML = myObject.message;
-					}
-				}
+				$.ajax({
+					url: theobject.href,
+					dataType: "script"
+				})
+				.always(function(data) {
+					//it is going to fail even if it succeeds.
+					//this is because we are loading it as a script object to get around xhr domain restrictions
+					//just go ahead and reload the scoring either way
+					theobject.innerHTML = "Voted!";
+				});
 				
-				xmlhttp.send(null);
 				if ( theobject.id.substring(0,1) == "P" ) {
 					theotherone = document.getElementById("N" + theobject.id.substring(1));
 				} else {
